@@ -1,0 +1,24 @@
+module tb_common #(
+    parameter string TOP_MODULE = "design",
+    parameter int CLOCK_HALF_PERIOD = 5
+)();
+    
+    logic clk = 0;
+    logic rst_n = 1;
+    logic done = 0;
+    
+    always #(CLOCK_HALF_PERIOD) clk = ~clk;
+    
+    initial begin
+        $dumpfile("waveform.fst");
+        $dumpvars(0);
+        rst_n = 0;
+        repeat(3) @(negedge clk);
+        rst_n = 1;
+    end
+    
+    final begin
+        $display("Simulation finished for %s", TOP_MODULE);
+    end
+
+endmodule

@@ -1,0 +1,10 @@
+[project]
+name = "verilog-parser"
+version = "0.1.0"
+description = "Simple Verilog parser using sv-simpleparser"
+requires-python = ">=3.10"
+dependencies = [
+    "sv-simpleparser",
+]
+
+[tool.uv]
