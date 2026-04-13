@@ -1,0 +1,8 @@
+name = "fde"
+
+[synthesis]
+top = "top"
+command = "script fde.ys"
+
+[simulation]
+testbench_dir = "test"

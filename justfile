@@ -2,13 +2,13 @@ YOSYS_BIN := require("yosys")
 verilator_BIN := require("verilator")
 surfer_BIN := require("surfer")
 cargo_BIN := require("cargo")
-FDE_CLI := "tools/bin"
-# FDE_CLI := "/home/b83c/hw/ufde/FDE-Source/output"
+FDE_CLI := "/home/b83c/hw/ufde/FDE-Source/output"
+# FDE_CLI := "tools/bin"
 HW_LIB := "hw_lib"
 
-TOP := "string_display"
+TOP := "tpm_aes"
 
-INPUT_FILE := "string_display.sv"
+INPUT_FILE := "tpm_aes.sv"
 YOSYS_DIR := "yosys"
 PIN_CONFIG := "VERICOMM_MAP.json"
 
@@ -28,30 +28,25 @@ synth file=INPUT_FILE:
     synth -run coarse; opt;
     proc; opt;
     memory; opt;
+    fsm; opt;
 
     techmap -map {{YOSYS_DIR}}/techmap.v; opt
     wreduce
     techmap -D NO_LUT -map {{YOSYS_DIR}}/cells_map.v; opt
-    techmap -map {{YOSYS_DIR}}/techmap.v; opt
-
-    dffunmap
+    techmap; opt
     dfflibmap -liberty {{YOSYS_DIR}}/fde_dc.lib
     dffinit 
-    # dffinit -ff DFFNHQ Q INIT -ff DFFHQ Q INIT -ff EDFFHQ Q INIT -ff DFFRHQ Q INIT -ff DFFSHQ Q INIT -ff DFFNRHQ Q INIT -ff DFFNSHQ Q INIT
-    wreduce; clean
+    # # dffinit -ff DFFNHQ Q INIT -ff DFFHQ Q INIT -ff EDFFHQ Q INIT -ff DFFRHQ Q INIT -ff DFFSHQ Q INIT -ff DFFNRHQ Q INIT -ff DFFNSHQ Q INIT
 
-    check
+    # check
     abc9 -lut 4 -liberty {{YOSYS_DIR}}/fde_dc.lib; opt
-    wreduce; clean
-    # Clean up yosys internal cells that weren't mapped
-    # delete -force \sdff \sdffe
-    # select -module top
-    # opt
     techmap -map {{YOSYS_DIR}}/cells_map.v; opt
-    techmap; opt
+
+
 
     stat
     write_edif build/{{file_stem(file)}}.edf
+    write_verilog -noexpr build/{{file_stem(file)}}_post.v
     "
 
 map file=INPUT_FILE:
@@ -99,9 +94,9 @@ bitgen file=INPUT_FILE:
         -c {{HW_LIB}}/fdp3p7_cil.xml \
         -b build/{{file_stem(file)}}.bit
 
-impl file=INPUT_FILE: synth
+impl file=INPUT_FILE: 
     #!/bin/bash
-    # just synth {{file}}
+    just synth {{file}}
     just pins {{file}}
     just map {{file}}
     just pack {{file}}
@@ -148,10 +143,36 @@ sim file=INPUT_FILE:
     just verilator {{file}} 
     just execute {{file}} 
 
+post_sim file=INPUT_FILE:
+    # !/bin/bash
+    set -e
+    
+    # just post_synth {{file}}
+    
+    rm -rf build/obj_dir_post
+    mkdir -p build
+    cd build && {{verilator_BIN}} --cc ../yosys/fdesimlib.v {{file_stem(file)}}_post.v ../src/tb_{{file_stem(file)}}.sv \
+        -I../src \
+        --timing \
+        --trace \
+        --trace-fst \
+        --trace-structs \
+        --trace-underscore \
+        --build \
+        --binary \
+        -j 0 \
+        -CFLAGS -O0 \
+        -Wno-fatal
+    ./build/obj_dir/Vtpm_aes --trace waveform_post.fst
+    echo "Output FST: build/waveform_post.fst"
+
+# view_post:
+#     {{surfer_BIN}} build/waveform_post.fst 
+
 view:
     {{surfer_BIN}} build/obj_dir/waveform.fst
 
-upload: impl
+upload: 
     cd fde-prog && {{cargo_BIN}} run 
 
 # clean:

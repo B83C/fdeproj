@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 .helix/
 .ruff_cache/
+place.log
+abc.history

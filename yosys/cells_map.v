@@ -1,6 +1,10 @@
 module  \$_DFF_N_ (input D, C, output Q); DFFNHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CKN(C)); endmodule
 module  \$_DFF_P_ (input D, C, output Q); DFFHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C)); endmodule
 
+// module  \$adff (input C, D, R, output Q); DFFRHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C), .RN(R)); endmodule
+// module  \$adffe (input C, D, E, R, output Q); DFFRHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C), .RN(R)); endmodule
+// module  \$sdffe (input C, D, E, R, output Q); EDFFTRHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C), .E(E), .RN(R)); endmodule
+
 module  \$_DFFE_PP_ (input D, C, E, output Q); EDFFHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C), .E(E)); endmodule
 module  \$_DFFE_PN_ (input D, C, E, output Q); EDFFHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C), .E(!E)); endmodule
 
@@ -8,6 +12,18 @@ module  \$_DFF_PN0_ (input D, C, R, output Q); DFFRHQ _TECHMAP_REPLACE_ (.D(D), 
 module  \$_DFF_PN1_ (input D, C, R, output Q); DFFSHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C), .SN(R)); endmodule
 module  \$_DFF_PP0_ (input D, C, R, output Q); DFFRHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C), .RN(!R)); endmodule
 module  \$_DFF_PP1_ (input D, C, R, output Q); DFFSHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C), .SN(!R)); endmodule
+
+module  \$dff (output Q, input D, C);
+  parameter WIDTH = 1;
+  parameter CLK_POLARITY = 1;
+  DFFHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CK(C));
+endmodule
+
+module  \$mux (output Y, input A, input B, input S);
+  parameter WIDTH = 1;
+  parameter LUT = 0;
+  LUT2 _TECHMAP_REPLACE_ (.ADR0(A), .ADR1(S), .O(Y));
+endmodule
 
 module  \$_DFF_NN0_ (input D, C, R, output Q); DFFNRHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CKN(C), .RN(R)); endmodule
 module  \$_DFF_NN1_ (input D, C, R, output Q); DFFNSHQ _TECHMAP_REPLACE_ (.D(D), .Q(Q), .CKN(C), .SN(R)); endmodule

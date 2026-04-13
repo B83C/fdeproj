@@ -12,9 +12,6 @@ module tb_common #(
     initial begin
         $dumpfile("waveform.fst");
         $dumpvars(0);
-        rst_n = 0;
-        repeat(3) @(negedge clk);
-        rst_n = 1;
     end
     
     final begin

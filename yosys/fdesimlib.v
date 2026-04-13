@@ -1,10 +1,43 @@
 module LUT2 (O,ADR0, ADR1);
 
-  parameter INIT = 4'h0;
+  parameter LUT_INIT = 4'h0;
 
   output O;
   input ADR0, ADR1;
-  assign O = INIT >> {ADR1,ADR0};
+  assign O = 1'(LUT_INIT >> {ADR1,ADR0});
+
+endmodule
+
+
+module LUT3 (O, ADR0, ADR1, ADR2);
+
+  parameter LUT_INIT = 8'h00;
+
+  output O;
+  input ADR0, ADR1, ADR2;
+  assign O = 1'(LUT_INIT >> {ADR2,ADR1,ADR0});
+
+endmodule
+
+
+module LUT4 (O, ADR0, ADR1, ADR2, ADR3);
+
+  parameter LUT_INIT = 16'h0000;
+
+  output O;
+  input ADR0, ADR1, ADR2, ADR3;
+  assign O = 1'(LUT_INIT >> {ADR3,ADR2,ADR1,ADR0});
+
+endmodule
+
+
+module LUT5 (O,ADR0, ADR1, ADR2, ADR3, ADR4);
+
+  parameter LUT_INIT = 32'h00000000;
+
+  output O;
+  input ADR0, ADR1, ADR2, ADR3, ADR4;
+  assign O = 1'(LUT_INIT >> {ADR4,ADR3,ADR2,ADR1,ADR0});
 
 endmodule
 
