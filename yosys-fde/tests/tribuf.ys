@@ -1,0 +1,15 @@
+read_verilog tribuf.v
+hierarchy -check -auto-top
+proc; opt; fsm; opt
+
+tribuf -logic
+
+techmap -map ../techmap.v; opt
+techmap -D NO_LUT -map ../cells_map.v; opt
+
+# simplemap
+
+
+stat
+
+

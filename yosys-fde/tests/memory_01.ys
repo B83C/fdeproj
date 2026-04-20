@@ -1,0 +1,12 @@
+read_verilog memory_01.v
+hierarchy -check -top test
+proc;;
+
+memory -nomap
+memory_libmap -lib ../brams.txt; opt;
+techmap -map ../brams_map.v; opt;
+memory_map ; opt
+
+stat
+
+

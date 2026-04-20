@@ -5,11 +5,12 @@ module tb_common #(
     
     logic clk = 0;
     logic rst_n = 1;
-    logic done = 0;
+    logic done;
     
     always #(CLOCK_HALF_PERIOD) clk = ~clk;
     
     initial begin
+        done = 0;
         $dumpfile("waveform.fst");
         $dumpvars(0);
     end

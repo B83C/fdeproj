@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "sw_interface",
+    # "svparser",
+]
+resolver = "3"
