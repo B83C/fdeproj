@@ -184,6 +184,7 @@ impl App for HostApp {
 
                     match load_design() {
                         Ok((inputs, outputs)) => {
+                            let console_output = outputs.get("console_char[0]").cloned();
                             let id = spawn(move || {
                                 let runner = || -> Result<()> {
                                     // dotenvy::dotenv()?;
@@ -217,14 +218,11 @@ impl App for HostApp {
                                         let rx: &mut [u16; 4] = bytemuck::cast_mut(&mut out);
                                         io.transfer_into(&input, rx)?;
 
-                                        let n = 1;
-                                        let bits = rx.view_bits::<Lsb0>();
-                                        println!(
-                                            "out {:64b}",
-                                            bits[n..n + 16].load_le::<u64>(),
-                                            // bits[0],
-                                            // bits[1],
-                                        );
+                                        if let Some(console_bit) = console_output {
+                                            let n = console_bit;
+                                            let bits = rx.view_bits::<Lsb0>();
+                                            print!("{}", bits[n..n + 8].load_le::<u8>() as char);
+                                        }
 
                                         output.store(out, Ordering::Relaxed);
 

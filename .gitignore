@@ -3,6 +3,6 @@ __pycache__/
 *.pyc
 .helix/
 .ruff_cache/
-place.log
-abc.history
+/place.log
+/abc.history
 /target

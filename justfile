@@ -29,7 +29,8 @@ synth file=INPUT_FILE:
 
     {{YOSYS_BIN}} -p "
 
-    plugin -i yosys-slang/build/slang.so
+    plugin -i ../yosys-slang/build/slang.so
+    # plugin yosys-slang 
 
     # read_verilog -sv -Isrc -top {{TOP}} {{SRC_PATH}}/*.sv 
     read_slang -Isrc -top {{TOP}} {{SRC_PATH}}/*.sv 
@@ -84,11 +85,12 @@ synth file=INPUT_FILE:
 
     opt; check;
 
-    iopadmap -bits -toutpad OBUFT T:I:O -tinoutpad IOBUF T:O:I:IO 
+    # iopadmap -bits -toutpad OBUFT T:I:O -tinoutpad IOBUF T:O:I:IO 
     # iopadmap -bits -outpad OBUF I:O -inpad IBUF O:I -toutpad OBUFT T:I:O -tinoutpad IOBUF T:O:I:IO 
 
     stat
     portlist
+    check
 
     # show
 
@@ -190,6 +192,11 @@ post_sim file=INPUT_FILE:
 view_routes file=INPUT_FILE:
     {{FDE_CLI}}/FDE -a ./fde/hw_lib/fdp3p7_arch.xml -d build/{{TOP}}/05-timed.xml
 
+all:
+    just synth
+    just impl_old
+    just upload_old
+
 view_wave:
     {{surfer_BIN}} build/{{TOP}}/waveform.fst
 
@@ -202,3 +209,7 @@ upload_old:
 clean:
     cargo clean
     rm -rf build/*
+
+doc:
+    typst compile report/report.typ --root . report.pdf
+    typst compile report/ppts.typ --root . ppt.pdf
