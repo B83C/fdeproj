@@ -160,3 +160,37 @@ Copyright (c) 2006-2009 FPGA-SoftwareGP.MEKeylab.FDU   All rights reserved.
 [2026-04-20, 20:18:27.640617] place: INFO :   * Final cost = 62.7459
 [2026-04-20, 20:18:27.641294] place: INFO : Progress   90%: begin to write placed netlist ...
 [2026-04-20, 20:18:27.659364] place: INFO : Successfully finish the placement. Elapsed Time: 3s
+[2026-04-22, 16:22:50.411347] place: INFO : Release 1.0 - Place
+Copyright (c) 2006-2009 FPGA-SoftwareGP.MEKeylab.FDU   All rights reserved.
+[2026-04-22, 16:22:50.411710] place: INFO : Progress    0%: parsing commands ...
+[2026-04-22, 16:22:50.412055] place: INFO : Progress   10%: loading arch library "fde/hw_lib/fdp3p7_arch.xml" ...
+[2026-04-22, 16:22:51.590008] place: INFO : Progress   20%: loading netlist "build/vl6180x/vl6180x_pack.xml" ...
+[2026-04-22, 16:22:51.697706] place: INFO : Progress   30%: loading constraint "build/vl6180x/vl6180x_cons.xml" ...
+[2026-04-22, 16:22:51.698611] place: INFO : Effort Level  : 1
+[2026-04-22, 16:22:51.698675] place: INFO : Mode          : Bounding Box
+[2026-04-22, 16:22:51.801387] place: INFO : Design        : "vl6180x", resource statistic:
+[2026-04-22, 16:22:51.801523] place: INFO :   * Amount of BLOCKRAM: 2
+[2026-04-22, 16:22:51.801582] place: INFO :   * Amount of GCLK: 1
+[2026-04-22, 16:22:51.801636] place: INFO :   * Amount of GCLKIOB: 1
+[2026-04-22, 16:22:51.801691] place: INFO :   * Amount of IOB: 21
+[2026-04-22, 16:22:51.801745] place: INFO :   * Amount of SLICE: 158
+[2026-04-22, 16:22:51.801804] place: INFO :   * Amount of Net: 360
+[2026-04-22, 16:22:51.801859] place: INFO : Device        : "fdp3000k", resource usage:
+[2026-04-22, 16:22:51.801937] place: INFO :   * Proportion of BLOCKRAM: 3.12%
+[2026-04-22, 16:22:51.802001] place: INFO :   * Proportion of GCLK: 25.00%
+[2026-04-22, 16:22:51.802064] place: INFO :   * Proportion of GCLKIOB: 25.00%
+[2026-04-22, 16:22:51.802115] place: INFO :   * Proportion of IOB: 14.79%
+[2026-04-22, 16:22:51.802167] place: INFO :   * Proportion of SLICE(LUT1): 5.14%
+[2026-04-22, 16:22:51.803459] place: INFO : Progress   50%: build FPGA architecture ...
+[2026-04-22, 16:22:51.969473] place: INFO : Progress   60%: begin to initially place ...
+[2026-04-22, 16:22:51.984487] place: INFO :   * Initial cost = 327.81
+[2026-04-22, 16:22:51.984609] place: INFO : Progress   70%: begin to perform place iteration ...
+[2026-04-22, 16:22:52.895927] place: INFO :   * After 20 iterations cost = 277.864
+[2026-04-22, 16:22:53.568605] place: INFO :   * After 40 iterations cost = 214.321
+[2026-04-22, 16:22:54.075008] place: INFO :   * After 60 iterations cost = 128.342
+[2026-04-22, 16:22:54.804840] place: INFO :   * After 80 iterations cost = 83.5404
+[2026-04-22, 16:22:55.362993] place: INFO :   * After 100 iterations cost = 67.5762
+[2026-04-22, 16:22:55.628874] place: INFO : Progress   80%: begin to perform final place iteration ...
+[2026-04-22, 16:22:55.640062] place: INFO :   * Final cost = 62.7459
+[2026-04-22, 16:22:55.641158] place: INFO : Progress   90%: begin to write placed netlist ...
+[2026-04-22, 16:22:55.692814] place: INFO : Successfully finish the placement. Elapsed Time: 5s

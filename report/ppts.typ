@@ -138,10 +138,23 @@
 
     #colbreak()
   ]
-  #figure(image(width: 50%, "report_images/18.png"), caption: [Custom GUI using vlfd-rs])
 ]
+
+#slide[
+  #figure(image("report_images/12.png"), caption: [General packet flow for reading a specific register on a slave])
+  #figure(
+    image("report_images/8.png"),
+    caption: [Test waveform running the i2c controller, with two bytes (0xA5, 0xB6) written, followed by a restart request (see red line)],
+  )
+  #figure(image("report_images/16.png"), caption: [Start up waveform captured with ADALM2000 viewed in Scopy])
+
+  #figure(image("report_images/17.png"), caption: [Polling data on the range register])
+]
+
+
 // Slide with title
 #slide(title: "Some images of the experiment setup", outlined: true)[
+  #figure(image(width: 50%, "report_images/18.png"), caption: [Custom GUI using vlfd-rs])
   #figure(
     grid(
       columns: 2,
@@ -183,6 +196,6 @@
 #focus-slide[
   That's it.
 
-  Thanks for listening
+  // Thanks for listening
   // This is an auto-resized _focus slide_.
 ]
